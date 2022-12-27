@@ -21,7 +21,9 @@ void mainLoop(unsigned int secondsToWait)
 
 int main(int argc, char *argv[])
 {
-    loadPrintables();
-    mainLoop(99);
+    if (loadPrintables() > 0);
+    {
+        mainLoop(99);
+    }
     return 0;
 }
