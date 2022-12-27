@@ -4,6 +4,7 @@
 
 #define ASCIIPATH "ascii_numbers.txt"
 
+#define MAX_LINE_LENGTH 100
 #define PRINTABLES_COUNT 10
 #define LINES_PER_PRINTABLE 11
 
@@ -21,9 +22,8 @@ int loadPrintables()
    char *line = NULL;
    size_t len = 0;
    ssize_t read;
-   int lineCount = 0;
-   int number = 0;
-
+   unsigned int lineCount = 0;
+   unsigned int number = 0;
    Printable *printable = malloc(sizeof(*printable));
 
    fp = fopen(ASCIIPATH, "r");
@@ -51,11 +51,19 @@ int loadPrintables()
    return 1;
 }
 
-/* Print the ascii numbers  to terminal*/
-void print(int8_t first, int8_t second)
+/* Print the ascii numbers (printables)  to terminal*/
+void printPrintable(unsigned int number)
 {
+   unsigned int tens = number % 10;
+   unsigned int ones = (unsigned int)(number % 100) / 10;
+
    for (int i = 0; i < LINES_PER_PRINTABLE; i++)
    {
-      printf("%s\n", printables[9].lines[i]);
+      char str[MAX_LINE_LENGTH];
+      strcpy(str, printables[ones].lines[i]);
+      strcat(str, " ");
+      strcat(str, printables[tens].lines[i]);
+      strcat(str, "\n");
+      printf("%s", str);
    }
 }

@@ -1,4 +1,4 @@
 #include"asciiHandler.c"
 
-int initAsciiHandler();
-
+int loadPrintables();
+void printPrintable(uint number);
